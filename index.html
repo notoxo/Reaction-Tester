@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Reaction Tester</title>
+  <link rel="stylesheet" href="mystyle.css" type="text/css">
+</head>
+
+  <body>
+    
+    <h2>Reaction Tester</h2>
+    <p>Click the squares of circles as quickly as you can!  </p>
+    <p style="font-size:13px;font-weight:700;">Reaction time: </p>
+
+    <div id="zero"></div>
+
+    <div id="obj"></div>
+
+    <script>
+
+      startTime = new Date();
+
+      var rad = Math.random() <= 0.5 ? 0 : 100;
+
+      var lf = Math.floor(Math.random() * 90);
+
+      var tp = Math.floor(Math.random() * 300);
+
+      document.getElementById("zero").style.width = "100px";
+      document.getElementById("zero").style.height = "100px";
+      document.getElementById("obj").style.width = "100px";
+      document.getElementById("obj").style.height = "100px";
+
+      function getRandomColor() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      }
+
+      function randomObjectAppear() {
+
+        document.getElementById("zero").style.display = "none";
+
+        var rad = Math.random() <= 0.5 ? 0 : 100;
+
+        var lf = Math.floor(Math.random() * 90);
+
+        var tp = Math.floor(Math.random() * 300);
+
+        var wrandomnumber = Math.floor(Math.random() * (150 - 75 + 1)) + 75;
+
+        document.getElementById("obj").style.width = wrandomnumber +"px";
+
+        document.getElementById("obj").style.height = wrandomnumber + "px";
+
+        document.getElementById("obj").style.borderRadius = rad + "%"; 
+
+        document.getElementById("obj").style.backgroundColor = getRandomColor();
+
+        document.getElementById("obj").style.left = lf + "%";
+  
+        document.getElementById("obj").style.top= tp + "px";
+
+      }
+
+      document.getElementById("zero").style.borderRadius = rad + "%"; 
+
+      
+      document.getElementById("zero").style.backgroundColor = getRandomColor();
+
+      document.getElementById("zero").style.left = lf + "%";
+
+      document.getElementById("zero").style.top= tp + "px";
+
+      document.getElementById("zero").onclick = function() {
+        randomObjectAppear();
+      }
+
+      document.getElementById("obj").onclick = function() {
+
+        randomObjectAppear();
+
+      }
+    </script>
+
+
+
+  </body>
+</html>
