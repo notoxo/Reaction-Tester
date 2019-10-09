@@ -12,15 +12,14 @@
     
     <h2>Reaction Tester</h2>
     <p>Click the squares of circles as quickly as you can!  </p>
-    <p style="font-size:13px;font-weight:700;">Reaction time: </p>
+    <p style="font-size:13px;font-weight:700;">Reaction time: <span id="reactionTime"></span></p>
 
-    <div id="zero"></div>
 
     <div id="obj"></div>
 
     <script>
 
-      startTime = new Date();
+      zero = new Date();
 
       var rad = Math.random() <= 0.5 ? 0 : 100;
 
@@ -28,10 +27,10 @@
 
       var tp = Math.floor(Math.random() * 300);
 
-      document.getElementById("zero").style.width = "100px";
-      document.getElementById("zero").style.height = "100px";
+     // document.getElementById("zero").style.width = "100px";
+    //  document.getElementById("zero").style.height = "100px";
       document.getElementById("obj").style.width = "100px";
-      document.getElementById("obj").style.height = "100px";
+      document.getElementById("obj").style.height = "100px"; 
 
       function getRandomColor() {
         var letters = '0123456789ABCDEF';
@@ -44,7 +43,7 @@
 
       function randomObjectAppear() {
 
-        document.getElementById("zero").style.display = "none";
+      //  document.getElementById("zero").style.display = "none";
 
         var rad = Math.random() <= 0.5 ? 0 : 100;
 
@@ -66,9 +65,37 @@
   
         document.getElementById("obj").style.top= tp + "px";
 
+        document.getElementById("obj").style.display = "block";
+
+        startTime = new Date();
+
       }
 
-      document.getElementById("zero").style.borderRadius = rad + "%"; 
+      function clickTrigger() {
+
+
+        randomObjectAppear();
+
+        document.getElementById("obj").style.display = "none";
+
+        randomObjectAppear();
+
+
+      }
+
+      function calculateReactionTime() {
+
+        endTime = new Date();
+
+        var reactionTime = parseInt(endTime-startTime,10);
+
+        document.getElementById("reactionTime").innerHTML = reactionTime + " ms";
+
+        
+
+      }
+
+     /* document.getElementById("zero").style.borderRadius = rad + "%"; 
 
       
       document.getElementById("zero").style.backgroundColor = getRandomColor();
@@ -79,11 +106,22 @@
 
       document.getElementById("zero").onclick = function() {
         randomObjectAppear();
-      }
+      }*/
+
+      randomObjectAppear();
 
       document.getElementById("obj").onclick = function() {
 
-        randomObjectAppear();
+     /*   randomObjectAppear();
+
+        document.getElementById("obj").style.display = "none";
+
+        randomObjectAppear();*/
+
+        calculateReactionTime();
+
+        clickTrigger();
+
 
       }
     </script>
