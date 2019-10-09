@@ -9,3 +9,34 @@
     position: relative;
 
 }
+
+#mm {
+
+  /* position: relative;
+    top: -120px;
+    font-weight: 700;
+    font-size: 13px;*/
+}
+
+#musicSelection {
+
+   /* position: relative;
+    left: 85%;
+    bottom: 100px;*/
+}
+
+#musicSel {
+
+   /* position: relative;
+    left: 85%;
+    bottom: 90px;
+    font-weight: 700;
+    font-size: 14px;*/
+
+}
+
+#start {
+
+    position: relative;
+
+}

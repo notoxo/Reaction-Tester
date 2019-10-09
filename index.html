@@ -14,10 +14,80 @@
     <p>Click the squares of circles as quickly as you can!  </p>
     <p style="font-size:13px;font-weight:700;">Reaction time: <span id="reactionTime"></span></p>
 
+  <p id="musicSel">Please select music</p>
+
+    <select onchange="getSelectedValue();" id="musicSelection">
+
+      <option value="starWars"id="starWars">Star Wars Theme</option>
+      <option value="gameOf" id="gameOf">Game of Thrones</option>
+      <option value="chef" id="chef">Chef's Special</option>
+
+    </select>  
 
     <div id="obj"></div>
 
+     <audio id="starWarsTheme">
+<source src="https://www.thesoundarchive.com/starwars/star-wars-theme-song.mp3" type="audio/mpeg">
+
+    </audio>
+
+    <audio id="gotTheme">
+      <source src="https://ypvnxx00-a.akamaihd.net/downloads/ringtones/files/dl/mp3/game-of-thrones-theme-song-ringtone-30782.mp3" type="audio/mpeg">
+    </audio>
+
+    <button id="start">Select</button> 
     <script>
+
+      function getSelectedValue() {
+
+        var selectedValue = document.getElementById("musicSelection").value;
+        console.log(selectedValue);
+        return selectedValue;
+
+      }
+
+      function musicSelector() {
+
+        var value = getSelectedValue();
+
+        if(value == "starWars") {
+
+          var mus = document.getElementById("starWarsTheme");
+
+          mus.play();
+
+        }
+        
+        else if (value == "chef") {
+
+          alert("cşeee");
+
+        }
+
+        else if (value == "gameOf") {
+
+          var mus = document.getElementById("gotTheme");
+
+          mus.play();
+
+        }
+
+      
+      }   
+
+      document.getElementById("start").onclick = function() {
+
+        getSelectedValue();
+
+        musicSelector();
+
+      }
+
+   
+
+     
+
+     // document.getElementById("mm").style.textAlign = "right";
 
       zero = new Date();
 
@@ -40,6 +110,8 @@
         }
         return color;
       }
+
+  
 
       function randomObjectAppear() {
 
@@ -80,8 +152,11 @@
 
         randomObjectAppear();
 
+        
 
       }
+
+      var avg = 0;
 
       function calculateReactionTime() {
 
@@ -89,11 +164,25 @@
 
         var reactionTime = parseInt(endTime-startTime,10);
 
-        document.getElementById("reactionTime").innerHTML = reactionTime + " ms";
+        if(avg == 0) {
 
-        
+          avg = reactionTime;
 
+        }
+
+        else {
+
+          avg = (reactionTime + avg) / 2;
+
+
+        }
+
+        realAverage = avg.toFixed(2);
+
+        document.getElementById("reactionTime").innerHTML = reactionTime + " ms" + " average ms: " + realAverage;
       }
+
+      
 
      /* document.getElementById("zero").style.borderRadius = rad + "%"; 
 
