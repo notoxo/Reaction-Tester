@@ -10,11 +10,11 @@
 
   <body>
     
-    <h2>Reaction Tester</h2>
-    <p>Click the squares of circles as quickly as you can!  </p>
-    <p style="font-size:13px;font-weight:700;">Reaction time: <span id="reactionTime"></span></p>
+    <h2 class="pr">Reaction Tester</h2>
+    <p class="pr">Click the squares of circles as quickly as you can!  </p>
+    <p style="font-size:13px;font-weight:700;" class="pr">Reaction time: <span id="reactionTime"></span></p>
 
-  <p id="musicSel">Please select music</p>
+  <p id="musicSel" class="pr">Please select music</p>
 
     <select onchange="getSelectedValue();" id="musicSelection">
 
@@ -23,6 +23,8 @@
       <option value="chef" id="chef">Chef's Special</option>
 
     </select>  
+
+    <img id="myVideo" src="https://media.giphy.com/media/aIR1vdOsUuNhe/giphy.gif" alt="">
 
     <div id="obj"></div>
 
@@ -46,6 +48,21 @@
 
       }
 
+      function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+      }
+
+      function starWarsStyle() {
+
+         var list = document.getElementsByClassName("pr");
+
+         for(var i=0; i<list.length; i++) {
+          list[i].style.color = "white";
+         }
+
+         document.getElementById("musicSelection").style.display = "none";
+      }
+
       function musicSelector() {
 
         var value = getSelectedValue();
@@ -55,6 +72,10 @@
           var mus = document.getElementById("starWarsTheme");
 
           mus.play();
+
+          document.getElementById("myVideo").style.display = "inline"
+
+          starWarsStyle();
 
         }
         
@@ -77,9 +98,13 @@
 
       document.getElementById("start").onclick = function() {
 
+        zero = new Date();
+
         getSelectedValue();
 
         musicSelector();
+
+        document.getElementById("start").style.display = "none";
 
       }
 
@@ -89,7 +114,7 @@
 
      // document.getElementById("mm").style.textAlign = "right";
 
-      zero = new Date();
+      
 
       var rad = Math.random() <= 0.5 ? 0 : 100;
 
@@ -141,14 +166,19 @@
 
         startTime = new Date();
 
+        
       }
 
-      function clickTrigger() {
+      async function clickTrigger() {
 
 
         randomObjectAppear();
 
         document.getElementById("obj").style.display = "none";
+
+        var sleepTime = Math.random() * (2000 - 250) + 250;
+
+        await sleep(sleepTime);
 
         randomObjectAppear();
 
