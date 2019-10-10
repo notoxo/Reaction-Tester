@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,113 +9,127 @@
   <link rel="stylesheet" href="mystyle.css" type="text/css">
 </head>
 
-  <body>
-    
-    <h2 class="pr">Reaction Tester</h2>
-    <p class="pr">Click the squares of circles as quickly as you can!  </p>
-    <p style="font-size:13px;font-weight:700;" class="pr">Reaction time: <span id="reactionTime"></span></p>
+<body>
+
+  <h2 class="pr">Reaction Tester</h2>
+  <p class="pr">Click the squares of circles as quickly as you can! </p>
+  <p style="font-size:13px;font-weight:700;" class="pr">Reaction time: <span id="reactionTime"></span></p>
 
   <p id="musicSel" class="pr">Please select music</p>
 
-    <select onchange="getSelectedValue();" id="musicSelection">
+  <select onchange="getSelectedValue();" id="musicSelection">
 
-      <option value="starWars"id="starWars">Star Wars Theme</option>
-      <option value="gameOf" id="gameOf">Game of Thrones</option>
-      <option value="chef" id="chef">Chef's Special</option>
+    <option value="starWars" id="starWars">Star Wars Theme</option>
+    <option value="gameOf" id="gameOf">Game of Thrones</option>
+    <option value="chef" id="chef">Chef's Special</option>
 
-    </select>  
+  </select>
 
-    <img id="myVideo" src="https://media.giphy.com/media/aIR1vdOsUuNhe/giphy.gif" alt="">
+  <img id="myVideo" src="https://media.giphy.com/media/aIR1vdOsUuNhe/giphy.gif" alt="">
 
-    <div id="obj"></div>
+  <div id="obj"></div>
 
-     <audio id="starWarsTheme">
-<source src="https://www.thesoundarchive.com/starwars/star-wars-theme-song.mp3" type="audio/mpeg">
+  <audio id="starWarsTheme">
+    <source src="https://www.thesoundarchive.com/starwars/star-wars-theme-song.mp3" type="audio/mpeg">
 
-    </audio>
+  </audio>
 
-    <audio id="gotTheme">
-      <source src="https://ypvnxx00-a.akamaihd.net/downloads/ringtones/files/dl/mp3/game-of-thrones-theme-song-ringtone-30782.mp3" type="audio/mpeg">
-    </audio>
+  <audio id="gotTheme">
+    <source
+      src="https://ypvnxx00-a.akamaihd.net/downloads/ringtones/files/dl/mp3/game-of-thrones-theme-song-ringtone-30782.mp3"
+      type="audio/mpeg">
+  </audio>
 
-    <button id="start">Select</button> 
-    <script>
+  <button id="start">Select</button>
+  <script>
+    function getSelectedValue() {
 
-      function getSelectedValue() {
+      var selectedValue = document.getElementById("musicSelection").value;
+      console.log(selectedValue);
+      return selectedValue;
 
-        var selectedValue = document.getElementById("musicSelection").value;
-        console.log(selectedValue);
-        return selectedValue;
+    }
+
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    function starWarsStyle() {
+
+      var list = document.getElementsByClassName("pr");
+
+      for (var i = 0; i < list.length; i++) {
+        list[i].style.color = "white";
+      }
+
+      document.getElementById("musicSelection").style.display = "none";
+    }
+
+    function musicSelector() {
+
+      var value = getSelectedValue();
+
+      if (value == "starWars") {
+
+        var mus = document.getElementById("starWarsTheme");
+
+        mus.play();
+
+        document.getElementById("myVideo").style.display = "inline"
+
+        starWarsStyle();
+
+      } else if (value == "chef") {
+
+        alert("cşeee");
+
+      } else if (value == "gameOf") {
+
+        var mus = document.getElementById("gotTheme");
+
+        mus.play();
 
       }
 
-      function sleep(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    document.getElementById("start").onclick = function () {
+
+      zero = new Date();
+
+      getSelectedValue();
+
+      musicSelector();
+
+      document.getElementById("start").style.display = "none";
+
+    }
+
+    // document.getElementById("mm").style.textAlign = "right";
+
+    var rad = Math.random() <= 0.5 ? 0 : 100;
+
+    var lf = Math.floor(Math.random() * 90);
+
+    var tp = Math.floor(Math.random() * 300);
+
+    // document.getElementById("zero").style.width = "100px";
+    //  document.getElementById("zero").style.height = "100px";
+    document.getElementById("obj").style.width = "100px";
+    document.getElementById("obj").style.height = "100px";
+
+    function getRandomColor() {
+      var letters = '0123456789ABCDEF';
+      var color = '#';
+      for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
       }
+      return color;
+    }
 
-      function starWarsStyle() {
+    function randomObjectAppear() {
 
-         var list = document.getElementsByClassName("pr");
-
-         for(var i=0; i<list.length; i++) {
-          list[i].style.color = "white";
-         }
-
-         document.getElementById("musicSelection").style.display = "none";
-      }
-
-      function musicSelector() {
-
-        var value = getSelectedValue();
-
-        if(value == "starWars") {
-
-          var mus = document.getElementById("starWarsTheme");
-
-          mus.play();
-
-          document.getElementById("myVideo").style.display = "inline"
-
-          starWarsStyle();
-
-        }
-        
-        else if (value == "chef") {
-
-          alert("cşeee");
-
-        }
-
-        else if (value == "gameOf") {
-
-          var mus = document.getElementById("gotTheme");
-
-          mus.play();
-
-        }
-
-      
-      }   
-
-      document.getElementById("start").onclick = function() {
-
-        zero = new Date();
-
-        getSelectedValue();
-
-        musicSelector();
-
-        document.getElementById("start").style.display = "none";
-
-      }
-
-   
-
-     
-
-     // document.getElementById("mm").style.textAlign = "right";
-
-      
+      //  document.getElementById("zero").style.display = "none";
 
       var rad = Math.random() <= 0.5 ? 0 : 100;
 
@@ -122,130 +137,94 @@
 
       var tp = Math.floor(Math.random() * 300);
 
-     // document.getElementById("zero").style.width = "100px";
-    //  document.getElementById("zero").style.height = "100px";
-      document.getElementById("obj").style.width = "100px";
-      document.getElementById("obj").style.height = "100px"; 
+      var wrandomnumber = Math.floor(Math.random() * (150 - 75 + 1)) + 75;
 
-      function getRandomColor() {
-        var letters = '0123456789ABCDEF';
-        var color = '#';
-        for (var i = 0; i < 6; i++) {
-          color += letters[Math.floor(Math.random() * 16)];
-        }
-        return color;
-      }
+      document.getElementById("obj").style.width = wrandomnumber + "px";
 
-  
+      document.getElementById("obj").style.height = wrandomnumber + "px";
 
-      function randomObjectAppear() {
+      document.getElementById("obj").style.borderRadius = rad + "%";
 
-      //  document.getElementById("zero").style.display = "none";
+      document.getElementById("obj").style.backgroundColor = getRandomColor();
 
-        var rad = Math.random() <= 0.5 ? 0 : 100;
+      document.getElementById("obj").style.left = lf + "%";
 
-        var lf = Math.floor(Math.random() * 90);
+      document.getElementById("obj").style.top = tp + "px";
 
-        var tp = Math.floor(Math.random() * 300);
+      document.getElementById("obj").style.display = "block";
 
-        var wrandomnumber = Math.floor(Math.random() * (150 - 75 + 1)) + 75;
+      startTime = new Date();
+    }
 
-        document.getElementById("obj").style.width = wrandomnumber +"px";
+    async function clickTrigger() {
 
-        document.getElementById("obj").style.height = wrandomnumber + "px";
-
-        document.getElementById("obj").style.borderRadius = rad + "%"; 
-
-        document.getElementById("obj").style.backgroundColor = getRandomColor();
-
-        document.getElementById("obj").style.left = lf + "%";
-  
-        document.getElementById("obj").style.top= tp + "px";
-
-        document.getElementById("obj").style.display = "block";
-
-        startTime = new Date();
-
-        
-      }
-
-      async function clickTrigger() {
-
-
-        randomObjectAppear();
-
-        document.getElementById("obj").style.display = "none";
-
-        var sleepTime = Math.random() * (2000 - 250) + 250;
-
-        await sleep(sleepTime);
-
-        randomObjectAppear();
-
-        
-
-      }
-
-      var avg = 0;
-
-      function calculateReactionTime() {
-
-        endTime = new Date();
-
-        var reactionTime = parseInt(endTime-startTime,10);
-
-        if(avg == 0) {
-
-          avg = reactionTime;
-
-        }
-
-        else {
-
-          avg = (reactionTime + avg) / 2;
-
-
-        }
-
-        realAverage = avg.toFixed(2);
-
-        document.getElementById("reactionTime").innerHTML = reactionTime + " ms" + " average ms: " + realAverage;
-      }
-
-      
-
-     /* document.getElementById("zero").style.borderRadius = rad + "%"; 
-
-      
-      document.getElementById("zero").style.backgroundColor = getRandomColor();
-
-      document.getElementById("zero").style.left = lf + "%";
-
-      document.getElementById("zero").style.top= tp + "px";
-
-      document.getElementById("zero").onclick = function() {
-        randomObjectAppear();
-      }*/
 
       randomObjectAppear();
 
-      document.getElementById("obj").onclick = function() {
+      document.getElementById("obj").style.display = "none";
 
-     /*   randomObjectAppear();
+      var sleepTime = Math.random() * (2000 - 250) + 250;
 
-        document.getElementById("obj").style.display = "none";
+      await sleep(sleepTime);
 
-        randomObjectAppear();*/
+      randomObjectAppear();
+    }
 
-        calculateReactionTime();
+    var avg = 0;
 
-        clickTrigger();
+    function calculateReactionTime() {
 
+      endTime = new Date();
+
+      var reactionTime = parseInt(endTime - startTime, 10);
+
+      if (avg == 0) {
+
+        avg = reactionTime;
+
+      } else {
+
+        avg = (reactionTime + avg) / 2;
 
       }
-    </script>
+
+      realAverage = avg.toFixed(2);
+
+      document.getElementById("reactionTime").innerHTML = reactionTime + " ms" + " average ms: " + realAverage;
+    }
+
+    /* document.getElementById("zero").style.borderRadius = rad + "%"; 
+
+     
+     document.getElementById("zero").style.backgroundColor = getRandomColor();
+
+     document.getElementById("zero").style.left = lf + "%";
+
+     document.getElementById("zero").style.top= tp + "px";
+
+     document.getElementById("zero").onclick = function() {
+       randomObjectAppear();
+     }*/
+
+    randomObjectAppear();
+
+    document.getElementById("obj").onclick = function () {
+
+      /*   randomObjectAppear();
+
+         document.getElementById("obj").style.display = "none";
+
+         randomObjectAppear();*/
+
+      calculateReactionTime();
+
+      clickTrigger();
 
 
+    }
+  </script>
 
-  </body>
+
+</body>
+
 </html>
